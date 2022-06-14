@@ -1,0 +1,69 @@
+ 
+
+select * from developer;
+select * from project;
+select * from address;
+
+
+select * from projects_developers;
+
+select * from projects_developers where developer_id=1;
+select * from project where id in (select project_id from projects_developers where developer_id=1);
+
+
+
+
+insert into address values(1,'KTM');
+insert into address values(2,'PKR');
+insert into address values(3,'Jhapa');
+
+insert into projects_developers values (2,2);
+insert into projects_developers values (2,8);
+insert into projects_developers values (2,1);
+
+
+
+select p.title,count(p.id) from project p
+    inner join projects_developers pd on p.id = pd.project_id
+    inner join developer d on pd.developer_id = d.id group by p.title;
+
+
+select p.* from project p inner join projects_developers pd on p.id = pd.project_id
+inner join developer d on pd.developer_id = d.id where d.name='Ram';
+
+select
+    developeri0_.project_id as project_1_2_0_,
+    developeri0_.developer_id as develope2_2_0_,
+    developer1_.id as id1_0_1_,
+    developer1_.department as departme2_0_1_,
+    developer1_.name as name3_0_1_,
+    developer1_.type as type4_0_1_
+from
+    projects_developers developeri0_
+        inner join
+    developer developer1_
+    on developeri0_.developer_id=developer1_.id
+where
+    developeri0_.project_id=1;
+
+select
+    developer0_.id as id1_1_,
+    developer0_.address_id as address_5_1_,
+    developer0_.department as departme2_1_,
+    developer0_.name as name3_1_,
+    developer0_.type as type4_1_
+from
+    developer developer0_ cross
+                              join
+    address address1_
+where
+        address1_.city in (
+        'KTM'
+        );
+
+
+select * from developer;
+select * from student;
+insert into student(id,address,faculty,first_name,last_name) values (1,'KTM','BCA','Ram','Thapa');
+insert into student values (2,'PKR','BIT','Shiva','Basnet');
+insert into student values (3,'Jhapa','BSC','Geeta','Thapa');
